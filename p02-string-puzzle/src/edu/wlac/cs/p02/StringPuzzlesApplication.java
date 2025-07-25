@@ -1,11 +1,11 @@
-package edu.wlac.cs.p02; // Defines package
+package edu.wlac.cs.p02;
 
-import java.util.Scanner; // Import Scanner
+import java.util.Scanner; 
 import java.util.Arrays;
 
 public class StringPuzzlesApplication {
 	
-	public static void main(String[] args) { // Main entry point
+	public static void main(String[] args) { 
 		String s1;
 		String s2;
 		
@@ -27,27 +27,24 @@ public class StringPuzzlesApplication {
 		System.out.println("\nis substring: " + isSubstring(s1, s2));
 	}
 	
+	// Helper method to normalize string 
+	private static StringBuilder normalize(String s) { //keep only letters/digits, lowercase
+		StringBuilder t = new StringBuilder();
+		for(int i = 0; i < s.length(); i++) {
+			char ch = s.charAt(i);
+			if(Character.isLetterOrDigit(ch)) {
+				t.append(Character.toLowerCase(ch));
+			}
+		}
+		return t;
+	}
+
 	public static boolean isAnagram(String s1, String s2) {
 		if(s1 == null || s2 == null) return false;
 		
-		StringBuilder t1 = new StringBuilder();
-		// Normalize s1
-		for(int i = 0; i < s1.length(); i++) {
-			char ch1 = s1.charAt(i);
-			if(Character.isLetterOrDigit(ch1)) {
-				t1.append(Character.toLowerCase(ch1));
-			}
-		}
-		
-		StringBuilder t2 = new StringBuilder();
-		// Normalize s2
-		for(int i = 0; i < s2.length(); i++) {
-			char ch2 = s2.charAt(i);
-			if(Character.isLetterOrDigit(ch2)) {
-				t2.append(Character.toLowerCase(ch2));
-			}
-			
-		}
+		// Use helper method to normalize both strings
+		StringBuilder t1 = normalize(s1);
+		StringBuilder t2 = normalize(s2);
 		
 		if(t1.length() != t2.length()) {
 			return false; // Different lengths mean not anagrams
@@ -68,16 +65,8 @@ public class StringPuzzlesApplication {
 		
 		if(s1 == null) return false; 
 		
-		StringBuilder t = new StringBuilder(); 
-		
-		// Filter string to keep only letters/digits
-		for(int i = 0; i < s1.length(); i++) { 
-			
-			char ch = s1.charAt(i);
-			if(Character.isLetterOrDigit(ch)) { 
-				t.append(Character.toLowerCase(ch)); 
-			}
-		}
+		// Use helper method to normalize string
+		StringBuilder t = normalize(s1);
 
 		int left = 0, right = t.length() - 1; 
 		
