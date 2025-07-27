@@ -29,9 +29,8 @@ public class StringPuzzlesApplication {
 	
 	// Helper method to normalize string 
 	private static StringBuilder normalize(String rawInput) { //keep only letters/digits, lowercase
-		StringBuilder normalizedBuilder = new StringBuilder();
-		for(int i = 0; i < rawInput.length(); i++) {
-			char currentChar = rawInput.charAt(i);
+		StringBuilder normalizedBuilder = new StringBuilder(); 
+		for(char currentChar : rawInput.toCharArray()) {
 			if(Character.isLetterOrDigit(currentChar)) {
 				normalizedBuilder.append(Character.toLowerCase(currentChar));
 			}
