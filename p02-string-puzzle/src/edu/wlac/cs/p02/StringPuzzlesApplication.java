@@ -2,6 +2,7 @@ package edu.wlac.cs.p02;
 
 import java.util.Scanner; 
 import java.util.Arrays;
+import java.util.stream.Collectors; // Import for Stream collectors
 
 public class StringPuzzlesApplication {
 	
@@ -27,15 +28,15 @@ public class StringPuzzlesApplication {
 		System.out.println("\nis substring: " + isSubstring(firstInput, secondInput));
 	}
 	
-	// Helper method to normalize string 
-	private static StringBuilder normalize(String rawInput) { //keep only letters/digits, lowercase
-		StringBuilder normalizedBuilder = new StringBuilder(); 
-		for(char currentChar : rawInput.toCharArray()) {
-			if(Character.isLetterOrDigit(currentChar)) {
-				normalizedBuilder.append(Character.toLowerCase(currentChar));
-			}
-		}
-		return normalizedBuilder;
+	// Helper method to normalize string using Java Streams
+	private static StringBuilder normalize(String rawInput) {
+		String normalizedString = rawInput.chars() // Create IntStream of characters
+				.filter(Character::isLetterOrDigit) // Keep only letters and digits
+				.mapToObj(c -> (char) Character.toLowerCase(c)) // Convert to lowercase char
+				.map(String::valueOf) // Convert chars to Strings
+				.collect(Collectors.joining()); // Join them all together
+
+		return new StringBuilder(normalizedString);
 	}
 
 	public static boolean isAnagram(String text1, String text2) {
