@@ -10,16 +10,14 @@ public class StringPuzzlesApplication {
 		String firstInput;
 		String secondInput;
 		
-		Scanner inputScanner = new Scanner(System.in); // Create Scanner
-		
-		System.out.print("Please enter the first string: \n");
-		
-		firstInput = inputScanner.nextLine(); // Read first line
-		
-		System.out.print("Please enter the second string: \n");
-		secondInput = inputScanner.nextLine(); // Read second line
-		
-		inputScanner.close(); // Close scanner
+		// Use try-with-resources to automatically close the scanner
+		try (Scanner inputScanner = new Scanner(System.in)) { // Create Scanner
+			System.out.print("Please enter the first string: \n");
+			firstInput = inputScanner.nextLine(); // Read first line
+			
+			System.out.print("Please enter the second string: \n");
+			secondInput = inputScanner.nextLine(); // Read second line
+		} // Scanner is automatically closed here, even if an exception occurs
 		
 		// Print results of check methods
 		System.out.print("\nString one is a palindrome?: " + isPalindrome(firstInput)); 
