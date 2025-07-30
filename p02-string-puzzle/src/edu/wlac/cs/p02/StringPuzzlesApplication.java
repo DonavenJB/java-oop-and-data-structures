@@ -20,10 +20,12 @@ public class StringPuzzlesApplication {
 		} // Scanner is automatically closed here, even if an exception occurs
 		
 		// Print results of check methods
-		System.out.print("\nString one is a palindrome?: " + isPalindrome(firstInput)); 
-		System.out.print("\nString two is a palindrome?: " + isPalindrome(secondInput));
-		System.out.println("\nIs string two an anagram of string one?: " + isAnagram(firstInput, secondInput));
-		System.out.println("\nis substring: " + isSubstring(firstInput, secondInput));
+		System.out.println("\nResults of tests:");
+		
+		System.out.println(firstInput + (isPalindrome(firstInput) ? " is" : " is not") + " a palindrome");
+		System.out.println(secondInput + (isPalindrome(secondInput) ? " is" : " is not") + " a palindrome");
+		System.out.println(secondInput + (isAnagram(firstInput, secondInput) ? " is" : " is not") + " an anagram of " + firstInput);
+		System.out.println(secondInput + (isSubstring(firstInput, secondInput) ? " is" : " is not") + " a substring of " + firstInput);
 	}
 	
 	// Helper method to normalize string using Java Streams
