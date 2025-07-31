@@ -68,17 +68,11 @@ public class StringPuzzlesApplication {
 		// Use helper method to normalize string
 		StringBuilder normalizedText = normalize(text);
 
-		int leftIndex = 0, rightIndex = normalizedText.length() - 1; 
-		
-		// Compare characters from ends to middle
-		while(leftIndex < rightIndex) { 
-			if(normalizedText.charAt(leftIndex) != normalizedText.charAt(rightIndex)) { 
-				return false; 
-			}
-			leftIndex++; 
-			rightIndex--; 
-		}
-		return true; 
+		// Compare the normalized string to its reversed version
+		String forward = normalizedText.toString();
+		String backward = normalizedText.reverse().toString();
+
+		return forward.equals(backward);
 	}
 	
 	public static boolean isSubstring(String text1, String text2) {
