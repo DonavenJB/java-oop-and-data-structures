@@ -78,10 +78,9 @@ public class StringPuzzlesApplication {
 	public static boolean isSubstring(String text1, String text2) {
 		if(text1 == null || text2 == null) return false;
 		
-		// Normalize by removing spaces and lowercasing
-		String cleanText1 = text1.toLowerCase().replace(" ", "");
-		
-		String cleanText2 = text2.toLowerCase().replace(" ", "");
+		// Use helper method to normalize both strings for consistency
+		String cleanText1 = normalize(text1).toString();
+		String cleanText2 = normalize(text2).toString();
 		
 		return cleanText1.contains(cleanText2);
 	}
