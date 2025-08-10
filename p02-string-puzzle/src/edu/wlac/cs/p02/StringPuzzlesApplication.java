@@ -7,17 +7,22 @@ import java.util.stream.Collectors; // Import for Stream collectors
 public class StringPuzzlesApplication {
 	
 	public static void main(String[] args) { 
+		// Use try-with-resources to automatically close the scanner
+		try (Scanner inputScanner = new Scanner(System.in)) { 
+			runUserInterface(inputScanner);
+		} // Scanner is automatically closed here, even if an exception occurs
+	}
+	
+	// Method to handle all user interaction
+	private static void runUserInterface(Scanner scanner) {
 		String firstInput;
 		String secondInput;
 		
-		// Use try-with-resources to automatically close the scanner
-		try (Scanner inputScanner = new Scanner(System.in)) { // Create Scanner
-			System.out.print("Please enter the first string: \n");
-			firstInput = inputScanner.nextLine(); // Read first line
-			
-			System.out.print("Please enter the second string: \n");
-			secondInput = inputScanner.nextLine(); // Read second line
-		} // Scanner is automatically closed here, even if an exception occurs
+		System.out.print("Please enter the first string: \n");
+		firstInput = scanner.nextLine(); // Read first line
+		
+		System.out.print("Please enter the second string: \n");
+		secondInput = scanner.nextLine(); // Read second line
 		
 		// Print results of check methods
 		System.out.println("\nResults of tests:");
