@@ -34,29 +34,28 @@ public class StringPuzzlesApplication {
 	}
 	
 	// Helper method to normalize string using Java Streams
-	private static StringBuilder normalize(final String rawInput) {
-		final String normalizedString = rawInput.chars() // Create IntStream of characters
+	// Returns String instead of StringBuilder
+	private static String normalize(final String rawInput) {
+		return rawInput.chars() // Create IntStream of characters
 				.filter(Character::isLetterOrDigit) // Keep only letters and digits
 				.mapToObj(c -> (char) Character.toLowerCase(c)) // Convert to lowercase char
 				.map(String::valueOf) // Convert chars to Strings
-				.collect(Collectors.joining()); // Join them all together
-
-		return new StringBuilder(normalizedString);
+				.collect(Collectors.joining()); // Join them all together into a String
 	}
 
 	public static boolean isAnagram(final String text1, final String text2) {
 		if(text1 == null || text2 == null) return false;
 		
 		// Use helper method to normalize both strings
-		final StringBuilder normalizedText1 = normalize(text1);
-		final StringBuilder normalizedText2 = normalize(text2);
+		final String normalizedText1 = normalize(text1);
+		final String normalizedText2 = normalize(text2);
 		
 		if(normalizedText1.length() != normalizedText2.length()) {
 			return false; // Different lengths mean not anagrams
 		}
 		
-		final char[] charArray1 = normalizedText1.toString().toCharArray();
-		final char[] charArray2 = normalizedText2.toString().toCharArray();
+		final char[] charArray1 = normalizedText1.toCharArray();
+		final char[] charArray2 = normalizedText2.toCharArray();
 		
 		// Sort both arrays
 		java.util.Arrays.sort(charArray1);
@@ -71,21 +70,20 @@ public class StringPuzzlesApplication {
 		if(text == null) return false; 
 		
 		// Use helper method to normalize string
-		final StringBuilder normalizedText = normalize(text);
+		final String normalizedText = normalize(text);
 
-		// Compare the normalized string to its reversed version
-		final String forward = normalizedText.toString();
-		final String backward = normalizedText.reverse().toString();
+		// Create a StringBuilder just for the reversal operation
+		final String backward = new StringBuilder(normalizedText).reverse().toString();
 
-		return forward.equals(backward);
+		return normalizedText.equals(backward);
 	}
 	
 	public static boolean isSubstring(final String text1, final String text2) {
 		if(text1 == null || text2 == null) return false;
 		
 		// Use helper method to normalize both strings for consistency
-		final String cleanText1 = normalize(text1).toString();
-		final String cleanText2 = normalize(text2).toString();
+		final String cleanText1 = normalize(text1);
+		final String cleanText2 = normalize(text2);
 		
 		return cleanText1.contains(cleanText2);
 	}
