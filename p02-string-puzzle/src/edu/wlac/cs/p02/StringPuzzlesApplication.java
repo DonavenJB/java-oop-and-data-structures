@@ -1,7 +1,6 @@
 package edu.wlac.cs.p02;
 
 import java.util.Scanner; 
-import java.util.Arrays;
 import java.util.stream.Collectors; 
 
 public class StringPuzzlesApplication {
@@ -18,14 +17,15 @@ public class StringPuzzlesApplication {
 		final String firstInput;
 		final String secondInput;
 		
-		System.out.print("Please enter the first string: \n");
+		// Use printf with %n for cross-platform newlines
+		System.out.printf("Please enter the first string: %n");
 		firstInput = scanner.nextLine(); // Read first line
 		
-		System.out.print("Please enter the second string: \n");
+		System.out.printf("Please enter the second string: %n");
 		secondInput = scanner.nextLine(); // Read second line
 		
-		// Print results of check methods
-		System.out.println("\nResults of tests:");
+		// Print results of check methods using cross-platform newline
+		System.out.println(System.lineSeparator() + "Results of tests:");
 		
 		System.out.println(firstInput + (isPalindrome(firstInput) ? " is" : " is not") + " a palindrome");
 		System.out.println(secondInput + (isPalindrome(secondInput) ? " is" : " is not") + " a palindrome");
@@ -43,6 +43,12 @@ public class StringPuzzlesApplication {
 				.collect(Collectors.joining()); // Join them all together into a String
 	}
 
+	/**
+	 * Checks if two strings are anagrams of each other.
+	 * @param text1 The first string to check.
+	 * @param text2 The second string to check.
+	 * @return true if they are anagrams, false otherwise. Returns false if either input is null.
+	 */
 	public static boolean isAnagram(final String text1, final String text2) {
 		if(text1 == null || text2 == null) return false;
 		
@@ -64,7 +70,11 @@ public class StringPuzzlesApplication {
 		return java.util.Arrays.equals(charArray1, charArray2);
 	}
 	
-	// Check if string is palindrome
+	/**
+	 * Checks if a string is a palindrome.
+	 * @param text The string to check.
+	 * @return true if it is a palindrome, false otherwise. Returns false if input is null.
+	 */
 	public static boolean isPalindrome(final String text) { 
 		
 		if(text == null) return false; 
@@ -78,6 +88,12 @@ public class StringPuzzlesApplication {
 		return normalizedText.equals(backward);
 	}
 	
+	/**
+	 * Checks if the second string is a substring of the first.
+	 * @param text1 The main string.
+	 * @param text2 The potential substring.
+	 * @return true if text2 is a substring of text1, false otherwise. Returns false if either input is null.
+	 */
 	public static boolean isSubstring(final String text1, final String text2) {
 		if(text1 == null || text2 == null) return false;
 		
