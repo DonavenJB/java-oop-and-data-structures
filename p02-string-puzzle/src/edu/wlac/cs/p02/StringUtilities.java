@@ -1,5 +1,7 @@
 package edu.wlac.cs.p02;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -23,7 +25,7 @@ public class StringUtilities {
 
     /**
      * Checks if two strings are anagrams of each other using an efficient
-     * character-counting algorithm O(N).
+     * character-counting algorithm O(N) that supports full Unicode.
      * @param text1 The first string to check.
      * @param text2 The second string to check.
      * @return true if they are anagrams, false otherwise.
@@ -38,17 +40,20 @@ public class StringUtilities {
             return false;
         }
 
-        // Frequency array instead of sorting.
-        // Size 128 is sufficient for standard ASCII letters and digits.
-        final int[] charCounts = new int[128];
+        // Use a HashMap to count character frequencies.
+        // This supports all Unicode characters, unlike a fixed-size array.
+        final Map<Character, Integer> charCounts = new HashMap<>();
 
         for (int i = 0; i < normalizedText1.length(); i++) {
-            charCounts[normalizedText1.charAt(i)]++;
-            charCounts[normalizedText2.charAt(i)]--;
+            char c1 = normalizedText1.charAt(i);
+            charCounts.put(c1, charCounts.getOrDefault(c1, 0) + 1);
+
+            char c2 = normalizedText2.charAt(i);
+            charCounts.put(c2, charCounts.getOrDefault(c2, 0) - 1);
         }
 
-        // If they are anagrams, all counts must be back to zero.
-        for (int count : charCounts) {
+        // If they are anagrams, all final counts in the map must be zero.
+        for (int count : charCounts.values()) {
             if (count != 0) {
                 return false;
             }
