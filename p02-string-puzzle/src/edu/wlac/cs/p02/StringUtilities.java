@@ -63,15 +63,30 @@ public class StringUtilities {
     }
 
     /**
-     * Checks if a string is a palindrome.
+     * Checks if a string is a palindrome using an efficient two-pointer approach.
+     * This avoids creating unnecessary temporary string objects.
      * @param text The string to check.
      * @return true if it is a palindrome, false otherwise.
      */
     public static boolean isPalindrome(final String text) {
         if (text == null) return false;
-        final String normalizedText = normalize(text);
-        final String backward = new StringBuilder(normalizedText).reverse().toString();
-        return normalizedText.equals(backward);
+
+        final String normalized = normalize(text);
+
+        int left = 0;
+        int right = normalized.length() - 1;
+
+        // Move pointers towards the center until they meet
+        while (left < right) {
+            // If characters at current pointers don't match, it's not a palindrome
+            if (normalized.charAt(left) != normalized.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+
+        return true;
     }
 
     /**
