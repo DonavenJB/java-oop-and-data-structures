@@ -2,7 +2,6 @@ package edu.wlac.cs.p02;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * A utility class containing static methods for string puzzle logic.
@@ -14,13 +13,23 @@ public class StringUtilities {
     private StringUtilities() {
     }
 
-    // Helper method to normalize string using Java Streams
+    // Helper method to normalize string using a StringBuilder for better performance
     private static String normalize(final String rawInput) {
-        return rawInput.chars()
-                .filter(Character::isLetterOrDigit)
-                .mapToObj(c -> (char) Character.toLowerCase(c))
-                .map(String::valueOf)
-                .collect(Collectors.joining());
+        if (rawInput == null || rawInput.isEmpty()) {
+            return "";
+        }
+        
+        // Pre-allocate StringBuilder with the input length to avoid resizing
+        final StringBuilder sb = new StringBuilder(rawInput.length());
+        
+        for (int i = 0; i < rawInput.length(); i++) {
+            final char c = rawInput.charAt(i);
+            if (Character.isLetterOrDigit(c)) {
+                sb.append(Character.toLowerCase(c));
+            }
+        }
+        
+        return sb.toString();
     }
 
     /**
