@@ -24,8 +24,22 @@ public class StringPuzzlesApplication {
             System.out.printf("Please enter the first string: %n");
             firstInput = scanner.nextLine();
 
+            // Gracefully handle empty input by skipping this iteration
+            if (firstInput.trim().isEmpty()) {
+                System.out.println("Error: Input cannot be empty or just whitespace. Please try again.");
+                System.out.println(); // Blank line for readability
+                continue;
+            }
+
             System.out.printf("Please enter the second string: %n");
             secondInput = scanner.nextLine();
+
+            // Gracefully handle empty input for the second string too
+            if (secondInput.trim().isEmpty()) {
+                System.out.println("Error: Input cannot be empty or just whitespace. Please try again.");
+                System.out.println();
+                continue;
+            }
 
             System.out.println(System.lineSeparator() + "Results of tests:");
 
